@@ -64,7 +64,7 @@ for f=1:noFrames
     end
 end
 
-save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_texture.mat'], 'histtext');
+%save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_texture.mat'], 'histtext');
 
 [framebelong,labelsatframe,noallsuperpixels]=Getmappedframes(mapped);
 maxnumberofsuperpixelsperframe=max(numberofsuperpixelsperframe);

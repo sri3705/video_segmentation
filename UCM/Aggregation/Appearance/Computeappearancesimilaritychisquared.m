@@ -62,7 +62,7 @@ for f=1:noFrames
     end
 end
 STA_hist = hist_complete;
-save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_STA_hist.mat'], 'STA_hist');
+%save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_STA_hist.mat'], 'STA_hist');
 
 [framebelong,labelsatframe,noallsuperpixels]=Getmappedframes(mapped);
 maxnumberofsuperpixelsperframe=max(numberofsuperpixelsperframe);

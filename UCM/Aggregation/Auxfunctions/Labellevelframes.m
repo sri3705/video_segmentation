@@ -31,5 +31,6 @@ if 1 == 2
         Printthevideoonscreen(labelledlevelvideo, printonscreen, 1);
     end
 end
-
-load('/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/vw_commercial/labelledlevelvideo.mat');
+global labelledlevelvideo_path;
+path = sprintf(labelledlevelvideo_path, Level);
+load(path);
