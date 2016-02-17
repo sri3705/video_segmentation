@@ -10,5 +10,5 @@ How to use:
 Lines 170 to 190
 
 2- Run the following command:
-     experiment_name = '80_hard_negatives_10'; level = '10'; VSS('vw_commercial_21f','ucm2level',level,'uselevelfrw', '1',    'ucm2levelfrw', level, 'newmethodfrw', '1', 'stpcas', 'paperoptnrm', 'experiment', experiment_name);
+     `experiment_name = '80_hard_negatives_10'; level = '10'; VSS('vw_commercial_21f','ucm2level',level,'uselevelfrw', '1',    'ucm2levelfrw', level, 'newmethodfrw', '1', 'stpcas', 'paperoptnrm', 'experiment', experiment_name);`
 
