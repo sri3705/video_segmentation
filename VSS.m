@@ -19,7 +19,7 @@ if (~isdeployed)
     Setthepath();
 end
 
-basedrive=['/cs/vml2/mkhodaba/cvpr16/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
+basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
 
 
 options.newucmtwo=true;
@@ -159,7 +159,7 @@ switch(theswitch)
      case 'vw_commercial_21f'
 %%%vw_commercial
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep];
-experiment_path = '/cs/vml2/mkhodaba/cvpr16/expriments/';
+experiment_path = '/cs/vml2/smuralid/projects/eccv16/experiments/';
 if isfield(options,'experiment')
 results_path = [experiment_path, options.experiment, filesep];
 else
