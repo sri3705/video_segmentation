@@ -16,7 +16,7 @@ function VSS(theswitch,varargin)
 % clear all
 
 if (~isdeployed)
-    Setthepath();
+    %Setthepath();
 end
 
 
@@ -170,7 +170,7 @@ options %#ok<NOPRT>
 basedrive=['/cs/vml2/mkhodaba/cvpr16/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
 experiment_path = '/cs/vml2/mkhodaba/cvpr16/expriments/';
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep];
-filename_sequence_basename_frames_or_video.vidinfo_path = [basename_variables_directory,  filesep, 'vidinfo.mat'];
+filename_sequence_basename_frames_or_video.vidinfo_path = sprintf([basename_variables_directory,  filesep, 'vidinfo_%02d.mat'], options.ucm2level);
 if isfield(options,'experiment')
 results_path = [experiment_path, options.experiment, filesep];
 else
