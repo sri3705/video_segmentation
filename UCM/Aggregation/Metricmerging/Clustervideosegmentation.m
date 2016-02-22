@@ -98,10 +98,10 @@ if (includethesuperpixels)
 else
     allthesegmentations=cell(1,numberofclusterings);
 end
-labelsfc=1:size(similarities,1);
-
+%MEHRAN commented this
+%labelsfc=1:size(similarities,1);
+    labelsfc=1:size(similarities,1);
 for level=1:numberofclusterings
-    
     if ( (strcmp(setclustermethod,'manifoldcl')) )
         tryonlinefirst=true; noreplicates=100; noGroups=mergesteps(level);
        

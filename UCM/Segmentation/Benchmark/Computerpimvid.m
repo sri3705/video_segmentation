@@ -102,7 +102,6 @@ end
 toc
 
 
-
 output=Plotsegmeval(outDir,plotsuperpose,curvecolor);
 
 %     rmdir(sbenchmarkdir,'s')
