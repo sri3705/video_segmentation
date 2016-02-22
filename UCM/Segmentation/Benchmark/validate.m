@@ -26,11 +26,11 @@ path(path,['Benchmark',filesep,'Auxbenchmark']);
 benchmarkpath = './Evaluation/'; %The directory where all results directory are contained
 %benchmarkdir= 'Algorithm_ochsbrox'; %One the computed results set up for benchmark, here the output of the algorithm of Ochs and Brox (Ucm2 folder) set up for the general benchmark (Images and Groundtruth folders)
 if idx == -1
-    basedrive=['/cs/vml2/mkhodaba/cvpr16/VSB100/',filesep];
+    basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
     basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep, '/Shared/Benchmark/'];
     benchmarkpath = [basename_variables_directory, filesep];    
 else
-    benchmarkpath = ['/cs/vml2/mkhodaba/cvpr16/expriments/', num2str(idx), '/Shared/Benchmark/'];
+    benchmarkpath = ['/local-scratch/experiments/', idx, '/Shared/Benchmark/'];
 end
 %benchmarkpath = ['/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/Shared/Benchmark/']
 %benchmarkpath = ['/cs/vml3/mkhodaba/cvpr16/Graph_construction/VideoProcessingTemp_1/Shared/Benchmark/'];

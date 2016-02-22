@@ -354,7 +354,10 @@ else %This section skips deleting and reloading cim and flows
         allregionsframes=0; allregionpaths=0; correspondentPath=0; trajectories=0; mapPathToTrajectory=0; thetrajectorytree=0; selectedtreetrajectories=0;
         flows=0; cim=0;
         return;
+    
     end
+    else
+        fprintf('MEHRAN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5\n')
     end
     %Adopt the new colored segmentation
     fprintf('Computation of colored hierarchical segments completed\n');
@@ -431,16 +434,20 @@ if ( (isfield(options,'filter_flow')) && (options.filter_flow) )
             
             %Level at which to threshold the UCM2 to get the superpixels:
             %for compatibility and comparison, this is chosen to be 1, notwithstanding ucm2level
-%             if ( (isfield(options,'ucm2level')) && (~isempty(options.ucm2level)) )
-%                 Level=options.ucm2level;
-%             else
+             if ( (isfield(options,'ucm2level')) && (~isempty(options.ucm2level)) )
+                 Level=options.ucm2level;
+             else
                 Level=1;
-%             end
+             end
             %Get the labels at all frames at Level
+            %Added by MEHRAN
             if 1 == 2
                 allthelabels=Getalllabels(ucm2,Level);
             else
-                load('/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/vw_commercial/labelledlevelvideo.mat');
+                global labelledlevelvideo_path;
+                path = sprintf(labelledlevelvideo_path, Level);
+                load(path);
+                %load('/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/vw_commercial/labelledlevelvideo.mat');
                 allthelabels = cell(1, 21);
                 for fr = 1:21
                     allthelabels{fr} = labelledlevelvideo(:,:,fr);

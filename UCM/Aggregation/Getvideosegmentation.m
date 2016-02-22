@@ -40,6 +40,12 @@ noFrames=numel(ucm2);
 [labelledlevelvideo,numberofsuperpixelsperframe]=Labellevelframes(ucm2,Level,noFrames,printonscreen);
 
 [mapped,framebelong,noallsuperpixels]=Mappedfromlabels(labelledlevelvideo); %,maxnumberofsuperpixelsperframe
+
+%% Added by MEHRAN
+vidinfo_path = [filename_sequence_basename_frames_or_video.vidinfo_path];
+save(vidinfo_path, 'labelledlevelvideo', 'numberofsuperpixelsperframe', 'mapped', 'framebelong');
+
+%%
 fprintf('%d number of superpixels in total at level %d (%d frames)\n',noallsuperpixels, Level, noFrames);
 %mapped provides the index transformation from (frame,label) to similarities
 %for inverse mapping
@@ -98,17 +104,24 @@ else
     size1spx=false;
 end
 
-if ~isfield(options,'experiment') &&  exist('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat', 'file') ~= 2
+anna_similarities_path = sprintf([filename_sequence_basename_frames_or_video.features_path filesep 'anna_similarities_%d.mat'],options.ucm2level);
+anna_all_similarities_path = sprintf([filename_sequence_basename_frames_or_video.features_path filesep 'anna_all_similarities_%d.mat'],options.ucm2level);
+
+%if ~isfield(options,'experiment') &&  exist('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat', 'file') ~= 2
+if ~isfield(options,'experiment') &&  exist(anna_similarities_path, 'file') ~= 2
     [similarities,STT,LTT,ABA,ABM,STM,STA,CTR,STA3,STM3,SD,STT_max,STT_mean,Dspx] =Getcombinedsimilarities(labelledlevelvideo,flows, ucm2, cim, mapped, ...
         filename_sequence_basename_frames_or_video, options, theoptiondata, filenames,...
         noallsuperpixels, framebelong, numberofsuperpixelsperframe, requestedaffinities, printonscreeninsidefunction,sizeofsprpix);
-
-    save('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_all_similarities.mat', 'STT', 'LTT', 'ABA', 'ABM', 'ABM', 'STM', 'STA', 'CTR', 'STA3', 'STM3', 'SD', 'STT_max', 'STT_mean', 'Dspx');
+            
+    %save('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_all_similarities.mat', 'STT', 'LTT', 'ABA', 'ABM', 'ABM', 'STM', 'STA', 'CTR', 'STA3', 'STM3', 'SD', 'STT_max', 'STT_mean', 'Dspx');
+    
+    save(anna_all_similarities_path, 'STT', 'LTT', 'ABA', 'ABM', 'ABM', 'STM', 'STA', 'CTR', 'STA3', 'STM3', 'SD', 'STT_max', 'STT_mean', 'Dspx');
     %% Learned graph
      if (options.within||options.across_2||options.across_n||options.across1||options.across2)
      similarities = Getnewgraph(STT,LTT,ABA,ABM,STM,STA,STM3,STA3,SD,STT_max,STT_mean,Dspx,CTR,noallsuperpixels,framebelong, options,softdecision,map);    
      end
-    save('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat', 'similarities');
+    %save('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat', 'similarities');
+    save(anna_similarities_path, 'similarities');
 
     %% Reweight similarities if requested
     if ( (isfield(options,'uselevelfrw')) && (~isempty(options.uselevelfrw)) && (options.uselevelfrw) )
@@ -128,17 +141,23 @@ if isfield(options,'experiment')
     %load(similarities_path);
     similarities = h5read(similarities_path, '/similarities');
     similarities = sparse(similarities);
-elseif exist('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat', 'file') == 2
+    
+    
+%elseif exist('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat', 'file') == 2
+elseif exist(anna_all_similarities_path, 'file') == 2
 
-    load('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat');
-    load('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_all_similarities.mat');
+    %load('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_similarities.mat');
+    %load('/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/anna_all_similarities.mat');
+    load(anna_similarities_path);
+    load(anna_all_similarities_path);
+else
+    error('[UCM::Aggregation::Getvideosegmentation] similarities are not computed.');
 end
- if ( (isfield(options,'uselevelfrw')) && (~isempty(options.uselevelfrw)) && (options.uselevelfrw) )
+%ADDED by MEHRAN (Reweight canceled)
+if ( (isfield(options,'uselevelfrw')) && (~isempty(options.uselevelfrw)) && (options.uselevelfrw) )
         [similarities]=Reweightwithhypercliquecardinality(similarities,labelledlevelvideo,options,ucm2,printonscreen);
- end
-%similarities_path = filename_sequence_basename_frames_or_video.similarities_path;
-%load(similarities_path);
-%similarities = sparse(similarities);
+end
+ 
 
 %% Computate clustering from matrix of similarities
 

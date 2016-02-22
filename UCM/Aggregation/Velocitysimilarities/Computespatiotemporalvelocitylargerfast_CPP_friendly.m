@@ -58,8 +58,8 @@ end
 [framebelong,labelsatframe,noallsuperpixels]=Getmappedframes(mapped);
 maxnumberofsuperpixelsperframe=max(numberofsuperpixelsperframe);  % used in CPP implementation
 
-save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_STM.mat'], 'allmedianu', 'allmedianv');
-save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_vidinfo.mat'], 'numberofsuperpixelsperframe', 'labelledlevelvideo', 'labelsatframe', 'framebelong', 'mapped');
+%save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_STM.mat'], 'allmedianu', 'allmedianv');
+%save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_vidinfo.mat'], 'numberofsuperpixelsperframe', 'labelledlevelvideo', 'labelsatframe', 'framebelong', 'mapped');
 
 
 USECPPIMPLEMENTATION=true;

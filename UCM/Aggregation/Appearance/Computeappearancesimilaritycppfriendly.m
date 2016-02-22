@@ -78,7 +78,7 @@ for f=1:noFrames
 end
 % Init_figure_no(6), imagesc(allmedianl)
 
-save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_STA.mat'], 'allmedianl', 'allmediana', 'allmedianb');
+%save(['/cs/vml3/mkhodaba/cvpr16/Graph_construction/Features/' filenames.casedirname '_STA.mat'], 'allmedianl', 'allmediana', 'allmedianb');
 
 [framebelong,labelsatframe,noallsuperpixels]=Getmappedframes(mapped);
 maxnumberofsuperpixelsperframe=max(numberofsuperpixelsperframe);

@@ -16,10 +16,17 @@ function VSS(theswitch,varargin)
 % clear all
 
 if (~isdeployed)
-    Setthepath();
+    %Setthepath();
 end
 
-basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
+
+
+
+
+
+
+
+
 
 
 options.newucmtwo=true;
@@ -154,17 +161,44 @@ options %#ok<NOPRT>
 %basedrive = [basedrive, options.experiment, filesep];
 %mkdir(basedrive);
 
-switch(theswitch)
 
-     case 'vw_commercial_21f'
-%%%vw_commercial
+
+
+
+
+%% ADDED by MEHRAN
+basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
+experiment_path = '/local-scratch/experiments/';
+%experiment_path = '/cs/vml2/smuralid/projects/eccv16/experiments/';
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep];
-experiment_path = '/cs/vml2/smuralid/projects/eccv16/experiments/';
+filename_sequence_basename_frames_or_video.vidinfo_path = sprintf([basename_variables_directory,  filesep, 'vidinfo_%02d.mat'], options.ucm2level);
 if isfield(options,'experiment')
 results_path = [experiment_path, options.experiment, filesep];
 else
 results_path = [basename_variables_directory, filesep];    
 end
+
+if isfield(options,'experiment')
+    filename_sequence_basename_frames_or_video.similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'similarities_superpixels.h'];
+    filename_sequence_basename_frames_or_video.new_similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'new_similarities.h'];
+    
+end
+filename_sequence_basename_frames_or_video.features_path = [basename_variables_directory, filesep, 'Features', filesep];
+mkdir(filename_sequence_basename_frames_or_video.features_path);
+
+global labelledlevelvideo_path 
+labelledlevelvideo_path = '/cs/vml2/smuralid/projects/eccv16/dataset/vw_commercial/b1/pixellabelledlevelvideo_%02d.mat';
+%%
+
+
+
+
+
+switch(theswitch)
+
+     case 'vw_commercial_21f'
+%%%vw_commercial
+
 
 filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
@@ -172,12 +206,8 @@ ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',f
 ucm2filename.number_format='%03d';
 ucm2filename.closure='_ucm2.bmp';
 ucm2filename.startNumber=0;
-if isfield(options,'experiment')
-    filename_sequence_basename_frames_or_video.similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'similarities_superpixels.h'];
-    filename_sequence_basename_frames_or_video.new_similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'new_similarities.h'];
-end
-filename_sequence_basename_frames_or_video.features_path = [basename_variables_directory, filesep, 'Features', filesep];
-mkdir(filename_sequence_basename_frames_or_video.features_path);
+
+
 filename_sequence_basename_frames_or_video.basename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'origimages',filesep,'image'];
 filename_sequence_basename_frames_or_video.number_format='%03d';
 filename_sequence_basename_frames_or_video.closure='.png';
