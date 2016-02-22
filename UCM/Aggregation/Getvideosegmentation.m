@@ -139,6 +139,7 @@ if isfield(options,'experiment')
     sprintf('Load learnt similarities ...\n');
     similarities_path = filename_sequence_basename_frames_or_video.similarities_path;
     %load(similarities_path);
+    fprintf('HHHHHHHHHHHHHHHH %s', similarities_path)
     similarities = h5read(similarities_path, '/similarities');
     similarities = sparse(similarities);
     

@@ -5,6 +5,7 @@ function output=Plotsegmeval(outDir,plotsuperpose,col)
 % modified by Fabio Galasso
 % February 2014
 
+logfile = fopen([outDir, filesep, 'results.txt'], 'w')
 output=struct();
 
 if ( (~exist('plotsuperpose','var')) || (isempty(plotsuperpose)) )
@@ -50,6 +51,11 @@ if (exist(fullfile(outDir,'eval_bdry_globalthr.txt'),'file'))
     end
     hold off
     
+    fprintf(logfile,'Boundary PR global\n');
+    fprintf(logfile,'   G-ODS: F( R %1.2f, P %1.2f ) = %1.2f   [th = %1.2f]\n',evalRes(2:4),evalRes(1));
+    fprintf(logfile,'   G-OIS: F( R %1.2f, P %1.2f ) = %1.2f\n',evalRes(5:7));
+    fprintf(logfile,'   Area_PR = %1.2f\n',evalRes(8));
+
     fprintf('Boundary PR global\n');
     fprintf('   G-ODS: F( R %1.2f, P %1.2f ) = %1.2f   [th = %1.2f]\n',evalRes(2:4),evalRes(1));
     fprintf('   G-OIS: F( R %1.2f, P %1.2f ) = %1.2f\n',evalRes(5:7));
@@ -82,6 +88,11 @@ if (exist(fullfile(outDir,'eval_regpr_globalthr.txt'),'file'))
     end
     hold off
     
+    fprintf(logfile,'Volume PR global\n');
+    fprintf(logfile,'   G-ODS: F( R %1.2f, P %1.2f ) = %1.2f   [th = %1.2f]\n',evalRes(2:4),evalRes(1));
+    fprintf(logfile,'   G-OSS: F( R %1.2f, P %1.2f ) = %1.2f\n',evalRes(5:7));
+    fprintf(logfile,'   G-Area_PR = %1.2f\n',evalRes(8));
+
     fprintf('Volume PR global\n');
     fprintf('   G-ODS: F( R %1.2f, P %1.2f ) = %1.2f   [th = %1.2f]\n',evalRes(2:4),evalRes(1));
     fprintf('   G-OSS: F( R %1.2f, P %1.2f ) = %1.2f\n',evalRes(5:7));
@@ -93,6 +104,8 @@ end
 %Segmentation covering
 if (exist(fullfile(outDir,'eval_cover.txt'),'file'))
     evalRes = dlmread(fullfile(outDir,'eval_cover.txt')); %bestT, bestR, R_best, R_best_total
+    fprintf(logfile,'Region\n');
+    fprintf(logfile,'   GT covering: ODS = %1.2f [th = %1.2f]. OSS = %1.2f. Best = %1.2f\n',evalRes(2),evalRes(1),evalRes(3:4));
     fprintf('Region\n');
     fprintf('   GT covering: ODS = %1.2f [th = %1.2f]. OSS = %1.2f. Best = %1.2f\n',evalRes(2),evalRes(1),evalRes(3:4));
     output.SC_ODS=evalRes(2); output.SC_OSS=evalRes(3); output.SC_Best=evalRes(4);
@@ -102,6 +115,9 @@ end
 %PRI and VI
 if (exist(fullfile(outDir,'eval_RI_VOI.txt'),'file'))
     evalRes = dlmread(fullfile(outDir,'eval_RI_VOI.txt'));
+    fprintf(logfile,'Region\n');
+    fprintf(logfile,'   Rand Index: ODS = %1.2f [th = %1.2f]. OSS = %1.2f.\n',evalRes(2),evalRes(1),evalRes(3));
+    fprintf(logfile,'   Var. Info.: ODS = %1.2f [th = %1.2f]. OSS = %1.2f.\n',evalRes(5),evalRes(4),evalRes(6));
     fprintf('Region\n');
     fprintf('   Rand Index: ODS = %1.2f [th = %1.2f]. OSS = %1.2f.\n',evalRes(2),evalRes(1),evalRes(3));
     fprintf('   Var. Info.: ODS = %1.2f [th = %1.2f]. OSS = %1.2f.\n',evalRes(5),evalRes(4),evalRes(6));
@@ -142,6 +158,8 @@ if ( (exist(fullfile(outDir,'eval_regpr_avgthr.txt'),'file')) && (exist(fullfile
             hold off
         
         [val,idx]=sort( abs( lengthvals(:,1)-repmat(evalRes(1),size(lengthvals,1),1) ) , 'ascend'); %#ok<ASGLU>
+        fprintf(logfile,'Length stats with Volume PR global\n');
+        fprintf(logfile,'   Length best F [th = %1.2f] G-ODS: mean %1.2f, std %1.2f \n',evalRes(1), lengthvals(idx(1),2), lengthvals(idx(1),3) );
         fprintf('Length stats with Volume PR global\n');
         fprintf('   Length best F [th = %1.2f] G-ODS: mean %1.2f, std %1.2f \n',evalRes(1), lengthvals(idx(1),2), lengthvals(idx(1),3) );
         output.MLen_G_ODS=lengthvals(idx(1),2); output.StdLen_G_ODS=lengthvals(idx(1),3);
@@ -178,6 +196,8 @@ if ( (exist(fullfile(outDir,'eval_regpr_avgthr.txt'),'file')) && (exist(fullfile
 
 
         [val,idx]=sort( abs( nclustervals(:,1)-repmat(evalRes(1),size(nclustervals,1),1) ) , 'ascend'); %#ok<ASGLU>
+        fprintf(logfile,'Ncluster stats with Volume PR global\n');
+        fprintf(logfile,'   Ncluster best F [th = %1.2f] G-ODS: avg ncluster %1.2f \n',evalRes(1), nclustervals(idx(1),2) );
         fprintf('Ncluster stats with Volume PR global\n');
         fprintf('   Ncluster best F [th = %1.2f] G-ODS: avg ncluster %1.2f \n',evalRes(1), nclustervals(idx(1),2) );
         output.Ncl_G_ODS=nclustervals(idx(1),2);
