@@ -434,11 +434,11 @@ if ( (isfield(options,'filter_flow')) && (options.filter_flow) )
             
             %Level at which to threshold the UCM2 to get the superpixels:
             %for compatibility and comparison, this is chosen to be 1, notwithstanding ucm2level
-%             if ( (isfield(options,'ucm2level')) && (~isempty(options.ucm2level)) )
-%                 Level=options.ucm2level;
-%             else
+             if ( (isfield(options,'ucm2level')) && (~isempty(options.ucm2level)) )
+                 Level=options.ucm2level;
+             else
                 Level=1;
-%             end
+             end
             %Get the labels at all frames at Level
             %Added by MEHRAN
             if 1 == 2
@@ -448,8 +448,8 @@ if ( (isfield(options,'filter_flow')) && (options.filter_flow) )
                 path = sprintf(labelledlevelvideo_path, Level);
                 load(path);
                 %load('/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/vw_commercial/labelledlevelvideo.mat');
-                allthelabels = cell(1, 21);
-                for fr = 1:21
+                allthelabels = cell(1, noFrames);
+                for fr = 1:noFrames
                     allthelabels{fr} = labelledlevelvideo(:,:,fr);
                 end
             end

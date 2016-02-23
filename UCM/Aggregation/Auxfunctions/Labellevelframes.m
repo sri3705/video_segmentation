@@ -34,3 +34,5 @@ end
 global labelledlevelvideo_path;
 path = sprintf(labelledlevelvideo_path, Level);
 load(path);
+labelledlevelvideo=labelledlevelvideo(:,:,1:noFrames);
+numberofsuperpixelsperframe = numberofsuperpixelsperframe(1:noFrames);
