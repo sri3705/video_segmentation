@@ -28,18 +28,22 @@ end
 
 noFrames=size(twlabelledlevelvideo,3);
 
-
-
-%Assign unique labels to larger superpixels (used in computing the correspondence matrix)
-twinlabelledlevelunique=twlabelledlevelvideo;
-count=0;
-for f=2:size(twinlabelledlevelunique,3)
-    count=count+max(max(twlabelledlevelvideo(:,:,(f-1))));
-    twinlabelledlevelunique(:,:,f)=twinlabelledlevelunique(:,:,f)+count;
+global voxelmode
+%% ADDED BY MEHRAN
+if voxelmode ~= 1
+    %Assign unique labels to larger superpixels (used in computing the correspondence matrix)
+    twinlabelledlevelunique=twlabelledlevelvideo;
+    count=0;
+    for f=2:size(twinlabelledlevelunique,3)
+        count=count+max(max(twlabelledlevelvideo(:,:,(f-1))));
+        twinlabelledlevelunique(:,:,f)=twinlabelledlevelunique(:,:,f)+count;
+    end
+    % nlargesuperpixels=count+max(max(twlabelledlevelvideo(:,:,size(twinlabelledlevelunique,3))));
+else
+    twinlabelledlevelunique = twlabelledlevelvideo;
 end
-% nlargesuperpixels=count+max(max(twlabelledlevelvideo(:,:,size(twinlabelledlevelunique,3))));
 
-
+%%
 
 maxnotracks=max(twinlabelledlevelunique(:));
 
@@ -64,19 +68,24 @@ else %Compute normpertrack with the superpixelization at the specified lower lev
     [twlabelledlowerlevel]=Labellevelframes(twucm2,Level,noFrames,printonscreen); %,numberofsuperpixelsperframe
     
     
-    
     %Assign unique labels to superpixels (used in computing the correspondence matrix)
-    twinlabelledlowerunique=twlabelledlowerlevel;
-    count=0;
-    for f=2:size(twlabelledlowerlevel,3)
-        count=count+max(max(twlabelledlowerlevel(:,:,(f-1))));
-        twinlabelledlowerunique(:,:,f)=twinlabelledlowerunique(:,:,f)+count;
+    %% Added by Mehran
+    if voxelmode ~= 1
+        twinlabelledlowerunique=twlabelledlowerlevel;
+        count=0;
+        for f=2:size(twlabelledlowerlevel,3)
+            count=count+max(max(twlabelledlowerlevel(:,:,(f-1))));
+            twinlabelledlowerunique(:,:,f)=twinlabelledlowerunique(:,:,f)+count;
+        end
+        noallsuperpixels=count+max(max(twlabelledlowerlevel(:,:,size(twlabelledlowerlevel,3))));
+        % Printthevideoonscreen(twlabelledlowerlevel, true, 1, true, [], [], true);
+        % Printthevideoonscreen(twinlabelledlowerunique, true, 1, true, [], [], true);
+    else
+        twlabelledlowerlevel = twlabelledlowerlevel(1:2:end, 1:2:end, :);
+        twinlabelledlowerunique = twlabelledlowerlevel;
+        noallsuperpixels = max(twlabelledlowerlevel(:));
     end
-    noallsuperpixels=count+max(max(twlabelledlowerlevel(:,:,size(twlabelledlowerlevel,3))));
-    % Printthevideoonscreen(twlabelledlowerlevel, true, 1, true, [], [], true);
-    % Printthevideoonscreen(twinlabelledlowerunique, true, 1, true, [], [], true);
-
-
+    %%
 
     %Compute correspondence matrix between superpixels and supervoxels
     corrsupertracks=Getcorrsupertracksmatrixmex(twinlabelledlevelunique,twinlabelledlowerunique,maxnotracks,noallsuperpixels);

@@ -30,7 +30,8 @@ if idx == -1
     basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep, '/Shared/Benchmark/'];
     benchmarkpath = [basename_variables_directory, filesep];    
 else
-    benchmarkpath = ['/cs/vml2/mkhodaba/cvpr16/expriments/', idx, '/Shared/Benchmark/'];
+    %benchmarkpath = ['/cs/vml2/mkhodaba/cvpr16/expriments/', idx, '/Shared/Benchmark/'];
+    benchmarkpath = ['/local-scratch/expriments/', idx, '/Shared/Benchmark/'];
 end
 %benchmarkpath = ['/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/Shared/Benchmark/']
 %benchmarkpath = ['/cs/vml3/mkhodaba/cvpr16/Graph_construction/VideoProcessingTemp_1/Shared/Benchmark/'];

@@ -162,13 +162,17 @@ options %#ok<NOPRT>
 %mkdir(basedrive);
 
 
+global voxelmode
+voxelmode = 1
 
 
 
 
 %% ADDED by MEHRAN
 basedrive=['/cs/vml2/mkhodaba/cvpr16/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
-experiment_path = '/cs/vml2/mkhodaba/cvpr16/expriments/';
+%basedrive=['/cs/vml3/mkhodaba/cvpr16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
+%experiment_path = '/cs/vml2/mkhodaba/cvpr16/expriments/';
+experiment_path = '/local-scratch/expriments/';
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,theswitch,filesep];
 filename_sequence_basename_frames_or_video.vidinfo_path = sprintf([basename_variables_directory,  filesep, 'vidinfo_%02d.mat'], options.ucm2level);
 if isfield(options,'experiment')
@@ -179,15 +183,18 @@ end
 
 if isfield(options,'experiment')
     filename_sequence_basename_frames_or_video.similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'similarities_superpixels.h'];
-    filename_sequence_basename_frames_or_video.new_similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'new_similarities.h'];
+    filename_sequence_basename_frames_or_video.voxel_similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'similarities.mat'];
     
 end
 filename_sequence_basename_frames_or_video.features_path = [basename_variables_directory, filesep, 'Features', filesep];
 mkdir(filename_sequence_basename_frames_or_video.features_path);
 
 global labelledlevelvideo_path 
-%labelledlevelvideo_path = [sprintf('/cs/vml3/mkhodaba/cvpr16/dataset/%s/b1/pixellabelledlevelvideo',theswitch), '_%02d.mat'];
-labelledlevelvideo_path = [sprintf('/cs/vml2/mkhodaba/datasets/VSB100/files/%s/pixellabelledlevelvideo',theswitch), '_%02d.mat'];
+labelledlevelvideo_path = [sprintf('/cs/vml3/mkhodaba/cvpr16/dataset/%s/b1/pixellabelledlevelvideo',theswitch), '_%02d.mat'];
+%labelledlevelvideo_path = '/cs/vml3/mkhodaba/cvpr16/dataset/vw_commercial/b1/voxellabelledlevelvideo_08.mat';
+global voxellabelledlevelvideo_path
+voxellabelledlevelvideo_path = sprintf('/cs/vml2/mkhodaba/datasets/VSB100/files/%s/voxellabelledlevelvideo_%02d.mat', theswitch, options.ucm2level);
+%labelledlevelvideo_path = [sprintf('/cs/vml2/mkhodaba/datasets/VSB100/files/%s/pixellabelledlevelvideo',theswitch), '_%02d.mat'];
 %%
 
 
@@ -210,11 +217,11 @@ ucm2filename.startNumber=0;
 
 filename_sequence_basename_frames_or_video.basename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'origimages',filesep,'image'];
 filename_sequence_basename_frames_or_video.number_format='%03d';
-filename_sequence_basename_frames_or_video.closure='.png';
+filename_sequence_basename_frames_or_video.closure='.ppm';
 filename_sequence_basename_frames_or_video.startNumber=79;
 filename_sequence_basename_frames_or_video.wrpbasename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'wrpimages',filesep,''];
 filename_sequence_basename_frames_or_video.wrpnumber_format='%03d';
-filename_sequence_basename_frames_or_video.wrpclosure='.png';
+filename_sequence_basename_frames_or_video.wrpclosure='.ppm';
 filename_sequence_basename_frames_or_video.wrpstartNumber=1;
 % filename_sequence_basename_frames_or_video.corbasename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'wrpimages',filesep,''];
     %corbasename replaces wrpbasename

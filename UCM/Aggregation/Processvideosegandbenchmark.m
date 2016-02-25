@@ -10,7 +10,9 @@ end
 timetic=tic;
 dimtouse=6;
 %Process video segmentation
+%MEHRAN SEGMENTATION REPLACE
 allthesegmentations=Getvideosegmentation(filenames,ucm2,flows,printonscreen,dimtouse,options,filename_sequence_basename_frames_or_video,videocorrectionparameters,cim);
+%load('/cs/vml2/mkhodaba/cvpr16/expriments/99-test_negatives/allsegsvw_commercial_21f.mat');
 fprintf('Time elapsed for the whole video segmentation process '); toc(timetic); fprintf('\n\n\n\n\n\n');
 if (isempty(allthesegmentations))
     error('allthesegmentations computation');
