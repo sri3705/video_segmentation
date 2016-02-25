@@ -34,3 +34,4 @@ end
 global labelledlevelvideo_path;
 path = sprintf(labelledlevelvideo_path, Level);
 load(path);
+labelledlevelvideo = double(labelledlevelvideo);

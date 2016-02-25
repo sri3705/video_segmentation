@@ -27,7 +27,7 @@ benchmarkpath = './Evaluation/'; %The directory where all results directory are 
 %benchmarkdir= 'Algorithm_ochsbrox'; %One the computed results set up for benchmark, here the output of the algorithm of Ochs and Brox (Ucm2 folder) set up for the general benchmark (Images and Groundtruth folders)
 if idx == -1
     basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
-    basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep, '/Shared/Benchmark/'];
+    basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing',filesep, '/Shared/Benchmark/'];
     benchmarkpath = [basename_variables_directory, filesep];    
 else
     benchmarkpath = ['/local-scratch/experiments/', idx, '/Shared/Benchmark/'];

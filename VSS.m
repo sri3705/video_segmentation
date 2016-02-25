@@ -166,11 +166,11 @@ options %#ok<NOPRT>
 
 
 
-%% ADDED by MEHRAN
+%% ADDED by MEHRAN:
 basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
 experiment_path = '/local-scratch/experiments/';
 %experiment_path = '/cs/vml2/smuralid/projects/eccv16/experiments/';
-basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep];
+basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,theswitch,filesep];
 filename_sequence_basename_frames_or_video.vidinfo_path = sprintf([basename_variables_directory,  filesep, 'vidinfo_%02d.mat'], options.ucm2level);
 if isfield(options,'experiment')
 results_path = [experiment_path, options.experiment, filesep];
@@ -187,7 +187,7 @@ filename_sequence_basename_frames_or_video.features_path = [basename_variables_d
 mkdir(filename_sequence_basename_frames_or_video.features_path);
 
 global labelledlevelvideo_path 
-labelledlevelvideo_path = '/cs/vml2/smuralid/projects/eccv16/dataset/vw_commercial/b1/pixellabelledlevelvideo_%02d.mat';
+labelledlevelvideo_path = [[sprintf('/cs/vml2/smuralid/projects/eccv16/dataset/%s/b1/', theswitch) ], 'pixellabelledlevelvideo_%02d.mat'];
 %%
 
 
@@ -3329,7 +3329,7 @@ noFrames=104;
     case 'rock_climbing'
 %%%rock_climbing
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3357,7 +3357,7 @@ filename_sequence_basename_frames_or_video=Addbnames(filename_sequence_basename_
 %filename_sequence_basename_frames_or_video.bgcode=[35,31,32]; filename_sequence_basename_frames_or_video.mbcode=[255,255,255;...
 %    147,149,152]; %[1x3 colour; otherobjects] _;26;51
 
-noFrames=31;
+noFrames=21;
 % [cim,ucm2,flows,allregionsframes,allregionpaths,correspondentPath,trajectories,mapPathToTrajectory,thetrajectorytree,selectedtreetrajectories]=... 
     Doallprocessing(filenames,filename_sequence_basename_frames_or_video,ucm2filename,noFrames,options,videocorrectionparameters);
     
