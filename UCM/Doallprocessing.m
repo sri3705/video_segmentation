@@ -448,8 +448,8 @@ if ( (isfield(options,'filter_flow')) && (options.filter_flow) )
                 path = sprintf(labelledlevelvideo_path, Level);
                 load(path);
                 %load('/cs/vml2/mkhodaba/cvpr16/VSB100/VideoProcessingTemp/vw_commercial/labelledlevelvideo.mat');
-                allthelabels = cell(1, 21);
-                for fr = 1:21
+                allthelabels = cell(1, noFrames);
+                for fr = 1:noFrames
                     allthelabels{fr} = labelledlevelvideo(:,:,fr);
                 end
             end

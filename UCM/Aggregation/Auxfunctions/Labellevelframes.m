@@ -31,7 +31,17 @@ if 1 == 2
         Printthevideoonscreen(labelledlevelvideo, printonscreen, 1);
     end
 end
-global labelledlevelvideo_path;
-path = sprintf(labelledlevelvideo_path, Level);
-load(path);
-labelledlevelvideo = double(labelledlevelvideo);
+global voxelmode
+if voxelmode == 1
+    global voxellabelledlevelvideo_path
+    load(voxellabelledlevelvideo_path);
+    labelledlevelvideo = double(labelledlevelvideo);
+    numberofsuperpixelsperframe = -1;
+else
+    global labelledlevelvideo_path;
+    path = sprintf(labelledlevelvideo_path, Level);
+    load(path);
+    labelledlevelvideo=labelledlevelvideo(:,:,1:noFrames);
+    labelledlevelvideo = double(labelledlevelvideo);
+    numberofsuperpixelsperframe = numberofsuperpixelsperframe(1:noFrames);
+end

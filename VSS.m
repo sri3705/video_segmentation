@@ -169,7 +169,6 @@ options %#ok<NOPRT>
 %% ADDED by MEHRAN:
 basedrive=['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/',filesep]; %Directory where the VideoProcessingTemp dir is located
 experiment_path = '/local-scratch/experiments/';
-%experiment_path = '/cs/vml2/smuralid/projects/eccv16/experiments/';
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,theswitch,filesep];
 filename_sequence_basename_frames_or_video.vidinfo_path = sprintf([basename_variables_directory,  filesep, 'vidinfo_%02d.mat'], options.ucm2level);
 if isfield(options,'experiment')
@@ -180,14 +179,14 @@ end
 
 if isfield(options,'experiment')
     filename_sequence_basename_frames_or_video.similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'similarities_superpixels.h'];
-    filename_sequence_basename_frames_or_video.new_similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'new_similarities.h'];
+    filename_sequence_basename_frames_or_video.voxel_similarities_path = [experiment_path, filesep, num2str(options.experiment),  filesep, 'similarities.mat'];
     
 end
 filename_sequence_basename_frames_or_video.features_path = [basename_variables_directory, filesep, 'Features', filesep];
 mkdir(filename_sequence_basename_frames_or_video.features_path);
 
 global labelledlevelvideo_path 
-labelledlevelvideo_path = [[sprintf('/cs/vml2/smuralid/projects/eccv16/dataset/%s/b1/', theswitch) ], 'pixellabelledlevelvideo_%02d.mat'];
+labelledlevelvideo_path = [[sprintf('/cs/vml2/smuralid/projects/eccv16/datasets/files/%s/', theswitch) ], 'voxellabelledlevelvideo_%02d.mat'];
 %%
 
 
@@ -210,11 +209,11 @@ ucm2filename.startNumber=0;
 
 filename_sequence_basename_frames_or_video.basename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'origimages',filesep,'image'];
 filename_sequence_basename_frames_or_video.number_format='%03d';
-filename_sequence_basename_frames_or_video.closure='.png';
+filename_sequence_basename_frames_or_video.closure='.ppm';
 filename_sequence_basename_frames_or_video.startNumber=79;
 filename_sequence_basename_frames_or_video.wrpbasename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'wrpimages',filesep,''];
 filename_sequence_basename_frames_or_video.wrpnumber_format='%03d';
-filename_sequence_basename_frames_or_video.wrpclosure='.png';
+filename_sequence_basename_frames_or_video.wrpclosure='.ppm';
 filename_sequence_basename_frames_or_video.wrpstartNumber=1;
 % filename_sequence_basename_frames_or_video.corbasename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'wrpimages',filesep,''];
     %corbasename replaces wrpbasename
@@ -237,7 +236,7 @@ noFrames=21;
     case 'Tud_cross_seq'
 %%%Tud_cross_seq
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Tud_cross_seq',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Tud_cross_seq',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -272,7 +271,7 @@ noFrames=201;
     case 'alec_baldwin'
 %%%alec_baldwin
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'alec_baldwin',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'alec_baldwin',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -307,7 +306,7 @@ noFrames=101;
       case 'alec_baldwin_toy'
 %%%alec_baldwin
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'alec_baldwin',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'alec_baldwin',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -343,7 +342,7 @@ noFrames=6;
     case 'anteater'
 %%%anteater
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'anteater',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'anteater',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -379,7 +378,7 @@ noFrames=121;
     case 'avalanche'
 %%%avalanche
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'avalanche',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'avalanche',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -415,7 +414,7 @@ noFrames=121;
     case 'big_wheel'
 %%%big_wheel
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'big_wheel',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'big_wheel',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -451,7 +450,7 @@ noFrames=97;
     case 'bowling'
 %%%bowling
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'bowling',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'bowling',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -487,7 +486,7 @@ noFrames=121;
     case 'campanile'
 %%%campanile
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'campanile',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'campanile',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -523,7 +522,7 @@ noFrames=121;
     case 'car_jump'
 %%%car_jump
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'car_jump',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'car_jump',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -559,7 +558,7 @@ noFrames=121;
     case 'chrome'
 %%%chrome
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'chrome',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'chrome',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -595,7 +594,7 @@ noFrames=121;
     case 'deoksugung'
 %%%deoksugung
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'deoksugung',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'deoksugung',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -631,7 +630,7 @@ noFrames=121;
     case 'dominoes'
 %%%dominoes
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'dominoes',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'dominoes',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -667,7 +666,7 @@ noFrames=121;
     case 'drone'
 %%%drone
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'drone',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'drone',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -703,7 +702,7 @@ noFrames=121;
     case 'excavator'
 %%%excavator
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'excavator',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'excavator',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -739,7 +738,7 @@ noFrames=121;
     case 'floorhockey'
 %%%floorhockey
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'floorhockey',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'floorhockey',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -775,7 +774,7 @@ noFrames=121;
     case 'galapagos'
 %%%galapagos
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'galapagos',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'galapagos',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -811,7 +810,7 @@ noFrames=64;
     case 'gray_squirrel'
 %%%gray_squirrel
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'gray_squirrel',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'gray_squirrel',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -847,7 +846,7 @@ noFrames=121;
     case 'guitar'
 %%%guitar
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'guitar',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'guitar',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -883,7 +882,7 @@ noFrames=121;
     case 'hippo_fight'
 %%%hippo_fight
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'hippo_fight',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'hippo_fight',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -919,7 +918,7 @@ noFrames=121;
     case 'horse_riding'
 %%%horse_riding
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'horse_riding',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'horse_riding',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -955,7 +954,7 @@ noFrames=121;
     case 'juggling'
 %%%juggling
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'juggling',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'juggling',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -991,7 +990,7 @@ noFrames=121;
     case 'kia_commercial'
 %%%kia_commercial
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'kia_commercial',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'kia_commercial',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1027,7 +1026,7 @@ noFrames=52;
     case 'knot'
 %%%knot
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'knot',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'knot',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1063,7 +1062,7 @@ noFrames=121;
     case 'lion'
 %%%lion
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'lion',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'lion',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1099,7 +1098,7 @@ noFrames=121;
     case 'liontwo'
 %%%liontwo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'liontwo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'liontwo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1133,7 +1132,7 @@ noFrames=121;
       case 'liontwo2'
 %%%liontwo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'liontwo2',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'liontwo2',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1169,7 +1168,7 @@ noFrames=121;
     case 'lukla_airport'
 %%%lukla_airport
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'lukla_airport',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'lukla_airport',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1205,7 +1204,7 @@ noFrames=121;
     case 'pouring_tea'
 %%%pouring_tea
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'pouring_tea',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'pouring_tea',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1241,7 +1240,7 @@ noFrames=121;
     case 'rock_climbing_tr'
 %%%rock_climbing_tr
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing_tr',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing_tr',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1277,7 +1276,7 @@ noFrames=61;
     case 'roller_coaster'
 %%%roller_coaster
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'roller_coaster',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'roller_coaster',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1313,7 +1312,7 @@ noFrames=105;
     case 'rolling_pin'
 %%%rolling_pin
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'rolling_pin',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'rolling_pin',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1349,7 +1348,7 @@ noFrames=121;
     case 'sailing'
 %%%sailing
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'sailing',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'sailing',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1385,7 +1384,7 @@ noFrames=117;
     case 'sea_snake'
 %%%sea_snake
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'sea_snake',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'sea_snake',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1421,7 +1420,7 @@ noFrames=121;
     case 'sea_turtle'
 %%%sea_turtle
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'sea_turtle',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'sea_turtle',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1457,7 +1456,7 @@ noFrames=121;
     case 'sitting_dog'
 %%%sitting_dog
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'sitting_dog',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'sitting_dog',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1493,7 +1492,7 @@ noFrames=80;
     case 'snow_shoes'
 %%%snow_shoes
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'snow_shoes',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'snow_shoes',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1529,7 +1528,7 @@ noFrames=121;
     case 'soccer'
 %%%soccer
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'soccer',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'soccer',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1565,7 +1564,7 @@ noFrames=121;
     case 'space_shuttle'
 %%%space_shuttle
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'space_shuttle',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'space_shuttle',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1601,7 +1600,7 @@ noFrames=121;
     case 'swing'
 %%%swing
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'swing',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'swing',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1637,7 +1636,7 @@ noFrames=121;
     case 'tarantula'
 %%%tarantula
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'tarantula',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'tarantula',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1673,7 +1672,7 @@ noFrames=121;
     case 'tennis_tr'
 %%%tennis_tr
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'tennis_tr',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'tennis_tr',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1709,7 +1708,7 @@ noFrames=121;
     case 'trampoline'
 %%%trampoline
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'trampoline',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'trampoline',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1745,7 +1744,7 @@ noFrames=121;
     case 'zoo'
 %%%zoo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'zoo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'zoo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1781,7 +1780,7 @@ noFrames=90;
     case 'airplane'
 %%%airplane
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'airplane',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'airplane',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1817,7 +1816,7 @@ noFrames=121;
     case 'angkor_wat'
 %%%angkor_wat
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'angkor_wat',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'angkor_wat',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1853,7 +1852,7 @@ noFrames=121;
     case 'animal_chase'
 %%%animal_chase
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'animal_chase',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'animal_chase',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1889,7 +1888,7 @@ noFrames=60;
     case 'arctic_kayak'
 %%%arctic_kayak
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'arctic_kayak',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'arctic_kayak',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1917,7 +1916,9 @@ filename_sequence_basename_frames_or_video=Addbnames(filename_sequence_basename_
 %filename_sequence_basename_frames_or_video.bgcode=[35,31,32]; filename_sequence_basename_frames_or_video.mbcode=[255,255,255;...
 %    147,149,152]; %[1x3 colour; otherobjects] _;26;51
 
-noFrames=50;
+%MEHRAN FRAME
+%noFrames=50;
+noFrames=20;
 % [cim,ucm2,flows,allregionsframes,allregionpaths,correspondentPath,trajectories,mapPathToTrajectory,thetrajectorytree,selectedtreetrajectories]=... 
     Doallprocessing(filenames,filename_sequence_basename_frames_or_video,ucm2filename,noFrames,options,videocorrectionparameters);
     
@@ -1925,7 +1926,7 @@ noFrames=50;
     case 'ballet'
 %%%ballet
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'ballet',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'ballet',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1961,7 +1962,7 @@ noFrames=87;
     case 'baseball'
 %%%baseball
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'baseball',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'baseball',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -1997,7 +1998,7 @@ noFrames=121;
     case 'beach_volleyball'
 %%%beach_volleyball
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'beach_volleyball',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'beach_volleyball',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2033,7 +2034,7 @@ noFrames=121;
     case 'belly_dancing'
 %%%belly_dancing
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'belly_dancing',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'belly_dancing',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2069,7 +2070,7 @@ noFrames=121;
     case 'beyonce'
 %%%beyonce
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'beyonce',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'beyonce',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2105,7 +2106,7 @@ noFrames=121;
     case 'bicycle_race'
 %%%bicycle_race
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'bicycle_race',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'bicycle_race',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2141,7 +2142,7 @@ noFrames=121;
     case 'birds_of_paradise'
 %%%birds_of_paradise
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'birds_of_paradise',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'birds_of_paradise',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2177,7 +2178,7 @@ noFrames=79;
     case 'buck'
 %%%buck
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'buck',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'buck',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2213,7 +2214,7 @@ noFrames=121;
     case 'buffalos'
 %%%buffalos
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'buffalos',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'buffalos',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2249,7 +2250,7 @@ noFrames=121;
     case 'capoeira'
 %%%capoeira
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'capoeira',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'capoeira',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2285,7 +2286,7 @@ noFrames=121;
     case 'chameleons'
 %%%chameleons
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'chameleons',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'chameleons',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2321,7 +2322,7 @@ noFrames=121;
     case 'fish_underwater'
 %%%fish_underwater
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'fish_underwater',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'fish_underwater',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2357,7 +2358,7 @@ noFrames=91;
     case 'fisheye'
 %%%fisheye
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'fisheye',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'fisheye',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2393,7 +2394,7 @@ noFrames=121;
     case 'freight_train'
 %%%freight_train
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'freight_train',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'freight_train',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2429,7 +2430,7 @@ noFrames=113;
     case 'frozen_lake'
 %%%frozen_lake
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'frozen_lake',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'frozen_lake',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2465,7 +2466,7 @@ noFrames=121;
     case 'gokart'
 %%%gokart
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'gokart',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'gokart',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2501,7 +2502,7 @@ noFrames=121;
     case 'harley_davidson'
 %%%harley_davidson
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'harley_davidson',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'harley_davidson',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2537,7 +2538,7 @@ noFrames=69;
     case 'hockey'
 %%%hockey
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'hockey',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'hockey',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2573,7 +2574,7 @@ noFrames=121;
     case 'hockey_goals'
 %%%hockey_goals
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'hockey_goals',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'hockey_goals',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2609,7 +2610,7 @@ noFrames=99;
     case 'horse_gate'
 %%%horse_gate
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'horse_gate',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'horse_gate',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2645,7 +2646,7 @@ noFrames=103;
     case 'hummingbird'
 %%%hummingbird
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'hummingbird',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'hummingbird',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2681,7 +2682,7 @@ noFrames=121;
     case 'humpback'
 %%%humpback
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'humpback',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'humpback',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2717,7 +2718,7 @@ noFrames=121;
     case 'jungle_cat'
 %%%jungle_cat
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'jungle_cat',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'jungle_cat',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2753,7 +2754,7 @@ noFrames=87;
     case 'kangaroo_fighting'
 %%%kangaroo_fighting
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'kangaroo_fighting',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'kangaroo_fighting',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2789,7 +2790,7 @@ noFrames=121;
     case 'kim_yu_na'
 %%%kim_yu_na
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'kim_yu_na',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'kim_yu_na',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2825,7 +2826,7 @@ noFrames=117;
     case 'koala'
 %%%koala
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'koala',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'koala',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2861,7 +2862,7 @@ noFrames=116;
     case 'monkeys_behind_fence'
 %%%monkeys_behind_fence
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'monkeys_behind_fence',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'monkeys_behind_fence',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2897,7 +2898,7 @@ noFrames=114;
     case 'nba_commercial'
 %%%nba_commercial
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'nba_commercial',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'nba_commercial',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2933,7 +2934,7 @@ noFrames=121;
     case 'new_york'
 %%%new_york
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'new_york',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'new_york',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -2969,7 +2970,7 @@ noFrames=121;
     case 'nordic_skiing'
 %%%nordic_skiing
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'nordic_skiing',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'nordic_skiing',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3005,7 +3006,7 @@ noFrames=121;
     case 'octopus'
 %%%octopus
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'octopus',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'octopus',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3041,7 +3042,7 @@ noFrames=121;
     case 'palm_tree'
 %%%palm_tree
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'palm_tree',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'palm_tree',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3077,7 +3078,7 @@ noFrames=121;
     case 'panda'
 %%%panda
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'panda',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'panda',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3113,7 +3114,7 @@ noFrames=121;
     case 'panda_cub'
 %%%panda_cub
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'panda_cub',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'panda_cub',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3149,7 +3150,7 @@ noFrames=121;
     case 'penguins'
 %%%penguins
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'penguins',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'penguins',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3185,7 +3186,7 @@ noFrames=94;
     case 'pepsis_wasps'
 %%%pepsis_wasps
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'pepsis_wasps',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'pepsis_wasps',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3221,7 +3222,7 @@ noFrames=121;
     case 'planet_earth_one'
 %%%planet_earth_one
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'planet_earth_one',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'planet_earth_one',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3257,7 +3258,7 @@ noFrames=68;
     case 'planet_earth_two'
 %%%planet_earth_two
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'planet_earth_two',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'planet_earth_two',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3293,7 +3294,7 @@ noFrames=90;
     case 'riverboat'
 %%%riverboat
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'riverboat',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'riverboat',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3339,7 +3340,9 @@ ucm2filename.startNumber=0;
 filename_sequence_basename_frames_or_video.basename=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing',filesep,'origimages',filesep,'image'];
 filename_sequence_basename_frames_or_video.number_format='%03d';
 filename_sequence_basename_frames_or_video.closure='.png';
-filename_sequence_basename_frames_or_video.startNumber=100;
+%MEHRAN
+filename_sequence_basename_frames_or_video.startNumber=112;
+%filename_sequence_basename_frames_or_video.startNumber=100;
 filename_sequence_basename_frames_or_video.wrpbasename=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing',filesep,'wrpimages',filesep,''];
 filename_sequence_basename_frames_or_video.wrpnumber_format='%03d';
 filename_sequence_basename_frames_or_video.wrpclosure='.png';
@@ -3352,12 +3355,16 @@ videocorrectionparameters.croparea=[]; %[width,height,xjshift (+right),yishift (
 filename_sequence_basename_frames_or_video.gtbasename=[basedrive,'VideoProcessingTemp',filesep,'rock_climbing',filesep,'gtimages',filesep,'gtimages_'];
 filename_sequence_basename_frames_or_video.gtnumber_format='%08d';
 filename_sequence_basename_frames_or_video.gtclosure='.png';
-filename_sequence_basename_frames_or_video.gtstartNumber=100;
+%MEHRAN
+filename_sequence_basename_frames_or_video.gtstartNumber=112;
+%filename_sequence_basename_frames_or_video.gtstartNumber=100;
 filename_sequence_basename_frames_or_video=Addbnames(filename_sequence_basename_frames_or_video,basedrive,filenames,'rock_climbing');
 %filename_sequence_basename_frames_or_video.bgcode=[35,31,32]; filename_sequence_basename_frames_or_video.mbcode=[255,255,255;...
 %    147,149,152]; %[1x3 colour; otherobjects] _;26;51
 
-noFrames=21;
+%MEHRAN
+%noFrames=31;
+noFrames=5;
 % [cim,ucm2,flows,allregionsframes,allregionpaths,correspondentPath,trajectories,mapPathToTrajectory,thetrajectorytree,selectedtreetrajectories]=... 
     Doallprocessing(filenames,filename_sequence_basename_frames_or_video,ucm2filename,noFrames,options,videocorrectionparameters);
     
@@ -3365,7 +3372,7 @@ noFrames=21;
     case 'rock_climbingtwo'
 %%%rock_climbingtwo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'rock_climbingtwo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'rock_climbingtwo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3401,7 +3408,7 @@ noFrames=90;
     case 'salsa'
 %%%salsa
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'salsa',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'salsa',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3437,7 +3444,7 @@ noFrames=121;
     case 'samba_kids'
 %%%samba_kids
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'samba_kids',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'samba_kids',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3473,7 +3480,7 @@ noFrames=121;
     case 'shark_attack'
 %%%shark_attack
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'shark_attack',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'shark_attack',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3509,7 +3516,7 @@ noFrames=121;
     case 'sled_dog_race'
 %%%sled_dog_race
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'sled_dog_race',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'sled_dog_race',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3545,7 +3552,7 @@ noFrames=121;
     case 'slow_polo'
 %%%slow_polo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'slow_polo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'slow_polo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3581,7 +3588,7 @@ noFrames=121;
     case 'snow_leopards'
 %%%snow_leopards
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'snow_leopards',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'snow_leopards',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3617,7 +3624,7 @@ noFrames=121;
     case 'snowboarding'
 %%%snowboarding
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'snowboarding',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'snowboarding',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3653,7 +3660,7 @@ noFrames=121;
     case 'snowboarding_crashes'
 %%%snowboarding_crashes
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'snowboarding_crashes',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'snowboarding_crashes',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3689,7 +3696,7 @@ noFrames=109;
     case 'street_food'
 %%%street_food
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'street_food',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'street_food',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3725,7 +3732,7 @@ noFrames=106;
     case 'swimming'
 %%%swimming
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'swimming',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'swimming',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3761,7 +3768,7 @@ noFrames=121;
     case 'up_dug'
 %%%up_dug
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'up_dug',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'up_dug',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3789,7 +3796,9 @@ filename_sequence_basename_frames_or_video=Addbnames(filename_sequence_basename_
 %filename_sequence_basename_frames_or_video.bgcode=[35,31,32]; filename_sequence_basename_frames_or_video.mbcode=[255,255,255;...
 %    147,149,152]; %[1x3 colour; otherobjects] _;26;51
 
-noFrames=97;
+%MEHRAN FRAME
+%noFrames=97;
+noFrames=20;
 % [cim,ucm2,flows,allregionsframes,allregionpaths,correspondentPath,trajectories,mapPathToTrajectory,thetrajectorytree,selectedtreetrajectories]=... 
     Doallprocessing(filenames,filename_sequence_basename_frames_or_video,ucm2filename,noFrames,options,videocorrectionparameters);
     
@@ -3797,7 +3806,7 @@ noFrames=97;
     case 'up_trailer'
 %%%up_trailer
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'up_trailer',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'up_trailer',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3833,7 +3842,7 @@ noFrames=94;
     case 'vw_commercial'
 %%%vw_commercial
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'vw_commercial',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3869,7 +3878,7 @@ noFrames=46;
     case 'white_tiger'
 %%%white_tiger
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'white_tiger',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'white_tiger',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3905,7 +3914,7 @@ noFrames=121;
     case 'yosemite'
 %%%yosemite
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'yosemite',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'yosemite',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -3941,7 +3950,7 @@ noFrames=121;
     case 'Newnorm1'
 %%%Newnorm1
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm1',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm1',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -3977,7 +3986,7 @@ noFrames=59; %60;
     case 'Newnorm2'
 %%%Newnorm2
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm2',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm2',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4013,7 +4022,7 @@ noFrames=60; %60;
     case 'Newnorm3'
 %%%Newnorm3
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm3',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm3',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4049,7 +4058,7 @@ noFrames=60; %60;
     case 'Newnorm4'
 %%%Newnorm4
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm4',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm4',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4085,7 +4094,7 @@ noFrames=60; %60;
     case 'Newnorm5'
 %%%Newnorm5
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm5',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm5',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4121,7 +4130,7 @@ noFrames=60; %60;
     case 'Newnorm6'
 %%%Newnorm6
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm6',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm6',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4157,7 +4166,7 @@ noFrames=60; %60;
     case 'Newnorm7'
 %%%Newnorm7
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm7',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm7',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4193,7 +4202,7 @@ noFrames=19; %60;
     case 'Newnorm8'
 %%%Newnorm8
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm8',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm8',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4229,7 +4238,7 @@ noFrames=60; %60;
     case 'Newnorm9'
 %%%Newnorm9
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm9',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm9',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4265,7 +4274,7 @@ noFrames=60; %60;
     case 'Newnorm10'
 %%%Newnorm10
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm10',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm10',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4301,7 +4310,7 @@ noFrames=60; %60;
     case 'Newnorm11'
 %%%Newnorm11
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm11',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm11',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4337,7 +4346,7 @@ noFrames=60; %60;
     case 'Newnorm12'
 %%%Newnorm12
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm12',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm12',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4373,7 +4382,7 @@ noFrames=60; %60;
     case 'Newnorm13'
 %%%Newnorm13
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm13',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm13',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4409,7 +4418,7 @@ noFrames=60; %60;
     case 'Newnorm14'
 %%%Newnorm14
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm14',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm14',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4445,7 +4454,7 @@ noFrames=60; %60;
     case 'Newnorm15'
 %%%Newnorm15
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm15',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm15',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4481,7 +4490,7 @@ noFrames=60; %60;
     case 'Newnorm16'
 %%%Newnorm16
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm16',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm16',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4517,7 +4526,7 @@ noFrames=60; %60;
     case 'Newnorm17'
 %%%Newnorm17
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm17',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm17',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4553,7 +4562,7 @@ noFrames=60; %60;
     case 'Newnorm18'
 %%%Newnorm18
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm18',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm18',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4589,7 +4598,7 @@ noFrames=60; %60;
     case 'Newnorm19'
 %%%Newnorm19
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm19',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm19',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4625,7 +4634,7 @@ noFrames=60; %60;
     case 'Newnorm20'
 %%%Newnorm20
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm20',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm20',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4661,7 +4670,7 @@ noFrames=60; %60;
     case 'Newnorm21'
 %%%Newnorm21
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm21',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm21',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4697,7 +4706,7 @@ noFrames=60; %60;
     case 'Newnorm22'
 %%%Newnorm22
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm22',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm22',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4733,7 +4742,7 @@ noFrames=30; %60;
     case 'Newnorm23'
 %%%Newnorm23
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm23',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm23',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4769,7 +4778,7 @@ noFrames=60; %60;
     case 'Newnorm24'
 %%%Newnorm24
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm24',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm24',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4805,7 +4814,7 @@ noFrames=60; %60;
     case 'Newnorm25'
 %%%Newnorm25
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm25',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm25',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4841,7 +4850,7 @@ noFrames=60; %60;
     case 'Newnorm26'
 %%%Newnorm26
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm26',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm26',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4877,7 +4886,7 @@ noFrames=60; %60;
     case 'Newnorm27'
 %%%Newnorm27
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm27',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm27',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4913,7 +4922,7 @@ noFrames=60; %60;
     case 'Newnorm28'
 %%%Newnorm28
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm28',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm28',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4949,7 +4958,7 @@ noFrames=60; %60;
     case 'Newnorm29'
 %%%Newnorm29
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm29',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm29',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -4985,7 +4994,7 @@ noFrames=60; %60;
     case 'Newnorm30'
 %%%Newnorm30
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm30',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm30',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5021,7 +5030,7 @@ noFrames=60; %60;
     case 'Newnorm31'
 %%%Newnorm31
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm31',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm31',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5057,7 +5066,7 @@ noFrames=60; %60;
     case 'Newnorm32'
 %%%Newnorm32
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm32',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm32',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5093,7 +5102,7 @@ noFrames=60; %60;
     case 'Newnorm33'
 %%%Newnorm33
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm33',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm33',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5129,7 +5138,7 @@ noFrames=60; %60;
     case 'Newnorm34'
 %%%Newnorm34
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm34',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm34',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5165,7 +5174,7 @@ noFrames=60; %60;
     case 'Newnorm35'
 %%%Newnorm35
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm35',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm35',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5201,7 +5210,7 @@ noFrames=60; %60;
     case 'Newnorm36'
 %%%Newnorm36
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm36',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm36',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5237,7 +5246,7 @@ noFrames=54; %60;
     case 'Newnorm37'
 %%%Newnorm37
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm37',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm37',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5273,7 +5282,7 @@ noFrames=60; %60;
     case 'Newnorm38'
 %%%Newnorm38
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm38',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm38',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5309,7 +5318,7 @@ noFrames=30; %60;
     case 'Newnorm39'
 %%%Newnorm39
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm39',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm39',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5345,7 +5354,7 @@ noFrames=60; %60;
     case 'Newnorm40'
 %%%Newnorm40
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm40',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm40',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5381,7 +5390,7 @@ noFrames=60; %60;
     case 'Newnorm41'
 %%%Newnorm41
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm41',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm41',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5417,7 +5426,7 @@ noFrames=30; %60;
     case 'Newnorm42'
 %%%Newnorm42
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm42',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm42',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5453,7 +5462,7 @@ noFrames=60; %60;
     case 'Newnorm43'
 %%%Newnorm43
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm43',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm43',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5489,7 +5498,7 @@ noFrames=60; %60;
     case 'Newnorm44'
 %%%Newnorm44
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Newnorm44',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Newnorm44',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5525,7 +5534,7 @@ noFrames=60; %60;
     case 'Shotfull1'
 %%%Shotfull1
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull1',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull1',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5561,7 +5570,7 @@ noFrames=60; %60;
     case 'Shotfull2'
 %%%Shotfull2
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull2',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull2',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5597,7 +5606,7 @@ noFrames=60; %66;
     case 'Shotfull3'
 %%%Shotfull3
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull3',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull3',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5633,7 +5642,7 @@ noFrames=60; %62;
     case 'Shotfull4'
 %%%Shotfull4
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull4',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull4',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5669,7 +5678,7 @@ noFrames=60; %130; %200
     case 'Shotfull5'
 %%%Shotfull5
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull5',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull5',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5705,7 +5714,7 @@ noFrames=60; %123;
     case 'Shotfull6'
 %%%Shotfull6
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull6',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull6',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5741,7 +5750,7 @@ noFrames=60; %130; %632
     case 'Shotfull7'
 %%%Shotfull7
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull7',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull7',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5777,7 +5786,7 @@ noFrames=60; %130; %303
     case 'Shotfull8'
 %%%Shotfull8
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull8',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull8',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5813,7 +5822,7 @@ noFrames=60; %128;
     case 'Shotfull9'
 %%%Shotfull9
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull9',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull9',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5849,7 +5858,7 @@ noFrames=60; %130;
     case 'Shotfull10'
 %%%Shotfull10
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull10',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull10',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5885,7 +5894,7 @@ noFrames=60; %76;
     case 'Shotfull11'
 %%%Shotfull11
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull11',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull11',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5921,7 +5930,7 @@ noFrames=60; %130; %188
     case 'Shotfull12'
 %%%Shotfull12
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull12',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull12',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5957,7 +5966,7 @@ noFrames=55; %55;
     case 'Shotfull13'
 %%%Shotfull13
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull13',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull13',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -5993,7 +6002,7 @@ noFrames=60; %102;
     case 'Shotfull14'
 %%%Shotfull14
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull14',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull14',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6029,7 +6038,7 @@ noFrames=60; %130; %162
     case 'Shotfull15'
 %%%Shotfull15
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotfull15',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotfull15',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6065,7 +6074,7 @@ noFrames=60; %130; %184
     case 'Shotnorm1'
 %%%Shotnorm1
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm1',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm1',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6101,7 +6110,7 @@ noFrames=60; %60;
     case 'Shotnorm2'
 %%%Shotnorm2
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm2',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm2',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6137,7 +6146,7 @@ noFrames=60; %66;
     case 'Shotnorm3'
 %%%Shotnorm3
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm3',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm3',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6173,7 +6182,7 @@ noFrames=60; %62;
     case 'Shotnorm4'
 %%%Shotnorm4
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm4',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm4',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6209,7 +6218,7 @@ noFrames=60; %130; %200
     case 'Shotnorm5'
 %%%Shotnorm5
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm5',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm5',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6245,7 +6254,7 @@ noFrames=60; %123;
     case 'Shotnorm6'
 %%%Shotnorm6
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm6',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm6',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6281,7 +6290,7 @@ noFrames=60; %130; %632
     case 'Shotnorm7'
 %%%Shotnorm7
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm7',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm7',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6317,7 +6326,7 @@ noFrames=60; %130; %303
     case 'Shotnorm8'
 %%%Shotnorm8
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm8',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm8',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6353,7 +6362,7 @@ noFrames=60; %128;
     case 'Shotnorm9'
 %%%Shotnorm9
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm9',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm9',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6389,7 +6398,7 @@ noFrames=60; %130;
     case 'Shotnorm10'
 %%%Shotnorm10
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm10',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm10',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6425,7 +6434,7 @@ noFrames=60; %76;
     case 'Shotnorm11'
 %%%Shotnorm11
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm11',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm11',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6461,7 +6470,7 @@ noFrames=60; %130; %188
     case 'Shotnorm12'
 %%%Shotnorm12
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm12',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm12',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6497,7 +6506,7 @@ noFrames=55; %55;
     case 'Shotnorm13'
 %%%Shotnorm13
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm13',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm13',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6533,7 +6542,7 @@ noFrames=60; %102;
     case 'Shotnorm14'
 %%%Shotnorm14
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm14',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm14',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6569,7 +6578,7 @@ noFrames=60; %130; %162
     case 'Shotnorm15'
 %%%Shotnorm15
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm15',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Shotnorm15',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6605,7 +6614,7 @@ noFrames=60; %130; %184
     case 'Marpletwo'
 %%%Marpletwo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpletwo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpletwo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -6647,7 +6656,7 @@ noFrames=117;
     case 'Marplefive'
 %%%Marplefive
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marplefive',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marplefive',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6689,7 +6698,7 @@ noFrames=94;
     case 'Marplethirteen'
 %%%Marplethirteen
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marplethirteen',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marplethirteen',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6731,7 +6740,7 @@ noFrames=75;
     case 'Carsfour'
 %%%Carsfour
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsfour',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsfour',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -6770,7 +6779,7 @@ noFrames=54;
     case 'Marpleone'
 %%%Marpleone
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpleone',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpleone',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -6809,7 +6818,7 @@ noFrames=100;
     case 'Marplethree'
 %%%Marplethree
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marplethree',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marplethree',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -6848,7 +6857,7 @@ noFrames=100;
     case 'Marplefour'
 %%%Marplefour
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marplefour',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marplefour',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -6887,7 +6896,7 @@ noFrames=43;
     case 'Marplesix'
 %%%Marplesix
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marplesix',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marplesix',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -6927,7 +6936,7 @@ noFrames=100;
     case 'Marpleseven'
 %%%Marpleseven
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpleseven',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpleseven',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -6968,7 +6977,7 @@ noFrames=100;
     case 'Marpleeight'
 %%%Marpleeight
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpleeight',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpleeight',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7009,7 +7018,7 @@ noFrames=72;
     case 'Marplenine'
 %%%Marplenine
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marplenine',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marplenine',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -7048,7 +7057,7 @@ noFrames=100;
     case 'Marpleten'
 %%%Marpleten
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpleten',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpleten',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -7089,7 +7098,7 @@ noFrames=100;
     case 'Marpleeleven'
 %%%Marpleeleven
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpleeleven',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpleeleven',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -7128,7 +7137,7 @@ noFrames=100;
     case 'Marpletwelve'
 %%%Marpletwelve
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Marpletwelve',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Marpletwelve',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -7169,7 +7178,7 @@ noFrames=100;
     case 'Tennis'
 %%%Tennis
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Tennis',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Tennis',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%03d';
@@ -7211,7 +7220,7 @@ noFrames=100;
     case 'Peopleone'
 %%%Peopleone
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Peopleone',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Peopleone',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7250,7 +7259,7 @@ noFrames=40;
     case 'Peopletwo'
 %%%Peopletwo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Peopletwo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Peopletwo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7289,7 +7298,7 @@ noFrames=30;
     case 'Carsone'
 %%%Carsone
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsone',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsone',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7325,7 +7334,7 @@ noFrames=19;
     case 'Carstwo'
 %%%Carstwo
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carstwo',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carstwo',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7363,7 +7372,7 @@ noFrames=30;
     case 'Carsthree'
 %%%Carsthree
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsthree',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsthree',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7399,7 +7408,7 @@ noFrames=19;
     case 'Carsfive'
 %%%Carsfive
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsfive',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsfive',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7435,7 +7444,7 @@ noFrames=36;
     case 'Carssix'
 %%%Carssix
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carssix',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carssix',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7471,7 +7480,7 @@ noFrames=30;
     case 'Carsseven'
 %%%Carsseven
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsseven',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsseven',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7507,7 +7516,7 @@ noFrames=24;
     case 'Carseight'
 %%%Carseight
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carseight',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carseight',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7545,7 +7554,7 @@ noFrames=24;
     case 'Carsnine'
 %%%Carsnine
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsnine',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsnine',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
@@ -7581,7 +7590,7 @@ noFrames=60;
     case 'Carsten'
 %%%Carsten
 basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,'Carsten',filesep];
-filenames=Getfilenames(basename_variables_directory,[],options);
+filenames=Getfilenames(basename_variables_directory,[],options, results_path);
 
 ucm2filename.basename=[basedrive,'VideoProcessingTemp',filesep,'Carsten',filesep,'ucm2images',filesep,'ucm2image'];
 ucm2filename.number_format='%02d';
