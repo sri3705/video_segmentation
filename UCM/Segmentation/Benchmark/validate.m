@@ -13,7 +13,8 @@
 %
 % Version 1.2
 
-
+global results_path
+results_path = '/cs/vml2/mkhodaba/datasets/VSB100/results/%s/'
 
 %Include the benchmark code into the Matlab path
 path(path,'Benchmark');
