@@ -161,6 +161,8 @@ options %#ok<NOPRT>
 %basedrive = [basedrive, options.experiment, filesep];
 %mkdir(basedrive);
 
+global voxelmode
+voxelmode = 1
 
 
 
@@ -185,8 +187,8 @@ end
 filename_sequence_basename_frames_or_video.features_path = [basename_variables_directory, filesep, 'Features', filesep];
 mkdir(filename_sequence_basename_frames_or_video.features_path);
 
-global labelledlevelvideo_path 
-labelledlevelvideo_path = [[sprintf('/cs/vml2/smuralid/projects/eccv16/datasets/files/%s/', theswitch) ], 'voxellabelledlevelvideo_%02d.mat'];
+global voxellabelledlevelvideo_path 
+voxellabelledlevelvideo_path = [sprintf('/cs/vml2/smuralid/projects/eccv16/datasets/files/%s/voxellabelledlevelvideo_%02d.mat', theswitch, options.ucm2level)];
 %%
 
 
