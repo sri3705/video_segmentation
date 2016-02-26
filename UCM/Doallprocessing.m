@@ -8,13 +8,13 @@ function [cim,ucm2,flows,allregionsframes,allregionpaths,correspondentPath,traje
 % end
 %allregionsframes=0; allregionpaths=0; correspondentPath=0; trajectories=0; mapPathToTrajectory=0; thetrajectorytree=0; selectedtreetrajectories=0; flows=0; ucm2=0; cim=0; fprintf('Debug program return\n'); return;
 
-
+options.noFramesMehran = noFrames;
 %Create needed directories
 Createalldirs(filenames);
 Createalldirs(ucm2filename);
 Createalldirs(filename_sequence_basename_frames_or_video);
 
-
+global experimentmode
 
 if (~exist('options','var'))
     options=[];
@@ -153,8 +153,8 @@ if ( (isfield(options,'vsmethod')) && (~isempty(options.vsmethod)) && (~strcmp(o
     return;
 end
 
-
-
+%% Experimentmode == 0
+if experimentmode == 0
 %Computes the flows
 if ( (exist(filenames.filename_flows,'file')) && (cleanifexisting>2) )
     load(filenames.filename_flows);
@@ -366,6 +366,10 @@ else %This section skips deleting and reloading cim and flows
         ucm2flow.startNumber,noFrames,printonscreen);
     fprintf('Loaded the ucm2s (valid %d)\n',valid);
 end
+
+end
+% end of experiment == 0 section
+%%
 %For interrupting calculation after segmentation
 % allregionsframes=0; allregionpaths=0; correspondentPath=0; trajectories=0; mapPathToTrajectory=0; thetrajectorytree=0; selectedtreetrajectories=0;
 % flows=0; cim=0;
@@ -415,6 +419,8 @@ if ( (isfield(options,'vsmethod')) && (~isempty(options.vsmethod)) && (strcmp(op
 end
 
 
+
+if experimentmode == 0
 %Filter the flow temporally and compute statistcs
 if (temporalmedianfilter)
     [flows]=Mediantimefilter(flows,temporalmediandepth,twolessedges); %,flowwasmodified
@@ -423,6 +429,8 @@ end
 
 
 %Filter the flows
+
+
 if ( (isfield(options,'filter_flow')) && (options.filter_flow) )
     if ( (isfield(options,'pre_filter_flow')) && (options.pre_filter_flow) )
         %for compatibility, if not indicated in options the flow is not pre-filtered
@@ -478,6 +486,10 @@ if ( (isfield(options,'filter_flow')) && (options.filter_flow) )
     % load(filenames.filename_flows);
 end
 %    error('done');
+else %experimentmode == 1
+    flows = 0;
+    ucm2 = 0;
+end
 
 
 %Compute video segmentation

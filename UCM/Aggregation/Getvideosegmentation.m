@@ -1,6 +1,7 @@
 function allthesegmentations=Getvideosegmentation(filenames,ucm2,flows,printonscreen,dimtouse,options,filename_sequence_basename_frames_or_video,videocorrectionparameters,cim)
 %Function shares code with Affinityfromsuperpixels
 global voxelmode
+global experimentmode
 %% Set up input and compute similarities
 
 if (~exist('options','var'))
@@ -76,11 +77,13 @@ end
     else
         size1spx=false;
     end
+noFrames=numel(ucm2);
+
 
 if voxelmode ~= 1
-    noFrames=numel(ucm2);
-
-
+    if experimentmode == 1
+        noFrames = options.noFramesMehran
+    end
     %Prepares a labelledlevelvideo for the requested Level (bwlabel and pixel sample)
     [labelledlevelvideo,numberofsuperpixelsperframe]=Labellevelframes(ucm2,Level,noFrames,printonscreen);
 
@@ -140,7 +143,7 @@ if voxelmode ~= 1
 
     %% Load learnt embedding similarities
     %EDIT BY MEHRAN (Mehran)
-    if 1 == 2
+    if 1 == 1
         if isfield(options,'experiment')
             sprintf('Load learnt similarities ...\n');
             similarities_path = filename_sequence_basename_frames_or_video.similarities_path;
@@ -200,22 +203,26 @@ if (   (isfield(options,'clustcompnumbers'))   &&   (~isempty(options.clustcompn
     mergesegmoptions.clusternumbermethod=options.clustcompnumbers;
 end
 
-%% ADDED BY MEHRAN 
-%load('/cs/vml3/mkhodaba/cvpr16/dataset/vw_commercial/b1/voxellabelledlevelvideo_08.mat');
-%load('/cs/vml2/mkhodaba/cvpr16/expriments/98-test_negatives/similarities_old.mat');
-global voxellabelledlevelvideo_path
 
-load(voxellabelledlevelvideo_path)
-load(filename_sequence_basename_frames_or_video.voxel_similarities_path)
-%load('/cs/vml2/mkhodaba/cvpr16/expriments/112-redo_vw21/similarities.mat');
-%load('/cs/vml2/mkhodaba/cvpr16/expriments/119-level8-200/similarities.mat');
-labelledlevelvideo = double(labelledlevelvideo(1:2:end, 1:2:end, :));
-if ( (isfield(options,'uselevelfrw')) && (~isempty(options.uselevelfrw)) && (options.uselevelfrw) )
-        [similarities]=Reweightwithhypercliquecardinality(similarities,labelledlevelvideo,options,ucm2,printonscreen);
+%% ADDED BY MEHRAN
+if voxelmode == 1
+    %load('/cs/vml3/mkhodaba/cvpr16/dataset/vw_commercial/b1/voxellabelledlevelvideo_08.mat');
+    %load('/cs/vml2/mkhodaba/cvpr16/expriments/98-test_negatives/similarities_old.mat');
+    global voxellabelledlevelvideo_path
+
+    load(voxellabelledlevelvideo_path)
+    load(filename_sequence_basename_frames_or_video.voxel_similarities_path)
+    %load('/cs/vml2/mkhodaba/cvpr16/expriments/112-redo_vw21/similarities.mat');
+    %load('/cs/vml2/mkhodaba/cvpr16/expriments/119-level8-200/similarities.mat');
+    labelledlevelvideo = double(labelledlevelvideo(1:2:end, 1:2:end, :));
+    if ( (isfield(options,'uselevelfrw')) && (~isempty(options.uselevelfrw)) && (options.uselevelfrw) )
+            [similarities]=Reweightwithhypercliquecardinality(similarities,labelledlevelvideo,options,ucm2,printonscreen);
+    end
+    similarities = sparse(similarities);
+    labelledlevelunique = labelledlevelvideo;
 end
-similarities = sparse(similarities);
 %%
-labelledlevelunique = labelledlevelvideo;
+
 allthesegmentations=Clustervideosegmentation(similarities,labelledlevelunique,options,filenames,mergesegmoptions, plmultiplicity);
 
 fprintf('\n\n\nVideo segmentation completed\n\n\n\n\n');
