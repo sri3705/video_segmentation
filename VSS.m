@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function VSS(theswitch,varargin)
 % VSS('vw_commercial_21f','ucm2level','30','uselevelfrw', '1', 'ucm2levelfrw', '1', 'newmethodfrw', '1', 'stpcas', 'paperoptnrm');
 
@@ -178,6 +177,9 @@ basename_variables_directory=[basedrive,'VideoProcessingTemp',filesep,theswitch,
 filename_sequence_basename_frames_or_video.vidinfo_path = sprintf([basename_variables_directory,  filesep, 'vidinfo_%02d.mat'], options.ucm2level);
 if isfield(options,'experiment')
 results_path = [experiment_path, options.experiment, filesep];
+'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%srik'
+global results_txt_path
+results_txt_path = ['/cs/vml2/smuralid/projects/eccv16/dataset/VSB100/results/', theswitch, '/']
 experimentmode = 1
 else
 results_path = [basename_variables_directory, filesep];    
@@ -196,13 +198,13 @@ filename_sequence_basename_frames_or_video.features_path = [basename_variables_d
 mkdir(filename_sequence_basename_frames_or_video.features_path);
 
 global labelledlevelvideo_path 
-labelledlevelvideo_path = [sprintf('/cs/vml2/smuralid/projects/eccv16/datasets/files/%s/pixellabelledlevelvideo',theswitch), '_%02d.mat'];
+labelledlevelvideo_path = [sprintf('/cs/vml2/mkhodaba/datasets/VSB100/files/%s/pixellabelledlevelvideo',theswitch), '_%02d.mat'];
 %labelledlevelvideo_path = '/cs/vml3/mkhodaba/cvpr16/dataset/vw_commercial/b1/voxellabelledlevelvideo_08.mat';
 filename_sequence_basename_frames_or_video.features_path = [basename_variables_directory, filesep, 'Features', filesep];
 mkdir(filename_sequence_basename_frames_or_video.features_path);
 
 global voxellabelledlevelvideo_path 
-voxellabelledlevelvideo_path = [sprintf('/cs/vml2/smuralid/projects/eccv16/datasets/files/%s/voxellabelledlevelvideo_%02d.mat', theswitch, options.ucm2level)];
+voxellabelledlevelvideo_path = [sprintf('/cs/vml2/mkhodaba/datasets/VSB100/files/%s/voxellabelledlevelvideo_%02d.mat', theswitch, options.ucm2level)];
 %%
 
 
